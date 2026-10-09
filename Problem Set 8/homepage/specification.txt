@@ -1,0 +1,25 @@
+HTML tags used (10+):
+1. <nav>
+2. <ul>
+3. <li>
+4. <a>
+5. <h1>
+6. <h2>
+7. <p>
+8. <button>
+9. <form>
+10. <input>
+Also used: <section>, <header>, <main>, <footer>, <label>, <textarea>, <strong>, <div>, <span>
+
+CSS properties used (5+):
+1. background-color
+2. color
+3. font-family
+4. margin-top
+5. padding
+Also used: font-size, font-weight, line-height, border-bottom, max-width
+
+JavaScript: A button shows a random fact, the home greeting changes with the time of day, and the contact form validates input and confirms without reloading.
+
+Bootstrap: I used the responsive navbar with a collapsing mobile menu, the accordion on the bouldering page, and the container, form, and button classes.
+

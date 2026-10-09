@@ -1,0 +1,81 @@
+:root {
+  --ink: #1f2a2e;
+  --paper: #f6f8f7;
+  --accent: #1f6f6b;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+.navbar {
+  border-bottom: 1px solid #d5dcda;
+}
+
+.navbar-brand {
+  font-family: Georgia, serif;
+  font-weight: 700;
+}
+
+.hero {
+  padding: 4rem 0 2rem;
+  max-width: 40rem;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--accent);
+  --bs-btn-border-color: var(--accent);
+  --bs-btn-hover-bg: #174f4c;
+  --bs-btn-hover-border-color: #174f4c;
+}
+
+.fact {
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+a {
+  color: var(--accent);
+}
+
+#form-status {
+  font-weight: 600;
+}
+
+footer {
+  margin-top: 4rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid #d5dcda;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .hero {
+    padding-top: 2rem;
+  }
+}
+

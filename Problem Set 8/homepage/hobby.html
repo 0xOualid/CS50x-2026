@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <link href="styles.css" rel="stylesheet">
+  <script src="script.js" defer></script>
+  <title>Bouldering | Your Name</title>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-sm">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Your Name</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+          aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="hobby.html">Bouldering</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main class="container">
+    <section>
+      <h1>Bouldering</h1>
+      <p>Bouldering is climbing short walls without ropes, over thick mats. Each route is a puzzle: you plan your moves,
+        fall, and try again.</p>
+      <h2>Why I like it</h2>
+      <p>It rewards patience. A route that feels impossible on Monday can be done by Friday.</p>
+      <h2>Tips for a first visit</h2>
+      <div class="accordion" id="tips">
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#tip1">What should I wear?</button>
+          </h3>
+          <div id="tip1" class="accordion-collapse collapse" data-bs-parent="#tips">
+            <div class="accordion-body">Comfortable clothes you can stretch in. Gyms rent shoes.</div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h3 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tip2">Do
+              I need to be strong?</button>
+          </h3>
+          <div id="tip2" class="accordion-collapse collapse" data-bs-parent="#tips">
+            <div class="accordion-body">No. Footwork matters more than arm strength at the start.</div>
+          </div>
+        </div>
+      </div>
+      <p class="mt-4"><a href="index.html">Back to home</a></p>
+    </section>
+  </main>
+  <footer class="container">
+    <p>&copy; 2026 Your Name. Built with HTML, CSS, JavaScript, and Bootstrap.</p>
+  </footer>
+</body>
+
+</html>
+

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <title>Trivia!</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // ---------- Part 1: Multiple choice ----------
+            let choices = document.querySelectorAll('.choice');
+            let mcFeedback = document.querySelector('#mc-feedback');
+
+            for (let i = 0; i < choices.length; i++) {
+                choices[i].addEventListener('click', function () {
+                    // Reset all buttons so only the latest click is colored
+                    for (let j = 0; j < choices.length; j++) {
+                        choices[j].style.backgroundColor = '';
+                    }
+
+                    if (choices[i].classList.contains('correct')) {
+                        choices[i].style.backgroundColor = 'green';
+                        mcFeedback.innerHTML = 'Correct!';
+                    } else {
+                        choices[i].style.backgroundColor = 'red';
+                        mcFeedback.innerHTML = 'Incorrect';
+                    }
+                });
+            }
+
+            // ---------- Part 2: Free response ----------
+            document.querySelector('#check').addEventListener('click', function () {
+                let input = document.querySelector('#answer');
+                let frFeedback = document.querySelector('#fr-feedback');
+                let answer = input.value.trim().toLowerCase();
+
+                if (answer === 'mercury') {
+                    input.style.backgroundColor = 'green';
+                    frFeedback.innerHTML = 'Correct!';
+                } else {
+                    input.style.backgroundColor = 'red';
+                    frFeedback.innerHTML = 'Incorrect';
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Trivia!</h1>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Part 1: Multiple Choice </h2>
+            <hr>
+            <h3>What is the largest planet in our solar system?</h3>
+            <button class="choice">Earth</button>
+            <button class="choice correct">Jupiter</button>
+            <button class="choice">Saturn</button>
+            <button class="choice">Mars</button>
+            <p id="mc-feedback"></p>
+        </div>
+
+        <div class="section">
+            <h2>Part 2: Free Response</h2>
+            <hr>
+            <h3>Which planet is closest to the Sun?</h3>
+            <input id="answer" type="text">
+            <button id="check">Check Answer</button>
+            <p id="fr-feedback"></p>
+        </div>
+    </div>
+</body>
+
+</html>
+

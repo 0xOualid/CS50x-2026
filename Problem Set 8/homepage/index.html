@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <link href="styles.css" rel="stylesheet">
+  <script src="script.js" defer></script>
+  <title>Home | Your Name</title>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-sm">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Your Name</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+          aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="hobby.html">Bouldering</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <h1 id="greeting">Hello, I'm Your Name.</h1>
+      <p class="lead">I'm a first-year student who loves computers and climbing walls. This site covers who I am and
+        what I do outside of class.</p>
+      <button id="fact-button" class="btn btn-primary" type="button">Show a random fact</button>
+      <p id="fact" class="fact" aria-live="polite"></p>
+    </section>
+    <section>
+      <h2>Where to next?</h2>
+      <ul>
+        <li><a href="about.html">About me</a>: where I'm from and what I study</li>
+        <li><a href="hobby.html">Bouldering</a>: why I climb and how to start</li>
+        <li><a href="contact.html">Contact</a>: send me a message</li>
+      </ul>
+    </section>
+  </main>
+  <footer class="container">
+    <p>&copy; 2026 Your Name. Built with HTML, CSS, JavaScript, and Bootstrap.</p>
+  </footer>
+</body>
+
+</html>
+
