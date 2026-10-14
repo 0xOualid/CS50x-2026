@@ -4,8 +4,7 @@
 
 int double_digit(int digit);
 
-int main(void)
-{
+int main(void) {
     // Get user input and calculate length of number
     long number = get_long("Number: ");
     int length = 1 + log10(number);
@@ -21,14 +20,12 @@ int main(void)
     int h = 0;
 
     // 14th digit, only if longer than 13
-    if (length > 13)
-    {
+    if (length > 13) {
         g = (number % 100000000000000) / 10000000000000;
     }
 
     // 16th digit, only if 16 digits long
-    if (length > 15)
-    {
+    if (length > 15) {
         h = (number % 10000000000000000) / 1000000000000000;
     }
 
@@ -53,8 +50,7 @@ int main(void)
     int p = 0;
 
     // 15th digit, only if longer than 14
-    if (length > 14)
-    {
+    if (length > 14) {
         p = (number % 1000000000000000) / 100000000000000;
     }
 
@@ -63,37 +59,30 @@ int main(void)
     int last_digit = total % 10;
 
     // Length must be 13, 15 or 16
-    if (length != 13 && length != 15 && length != 16)
-    {
+    if (length != 13 && length != 15 && length != 16) {
         printf("INVALID\n");
     }
     // Checksum must end in 0
-    else if (last_digit != 0)
-    {
+    else if (last_digit != 0) {
         printf("INVALID\n");
     }
     // 15 digits starting with 34 or 37 is AMEX
-    else if (length == 15 && p == 3 && (g == 4 || g == 7))
-    {
+    else if (length == 15 && p == 3 && (g == 4 || g == 7)) {
         printf("AMEX\n");
     }
     // 13 digits starting with 4 is VISA
-    else if (length == 13 && o == 4)
-    {
+    else if (length == 13 && o == 4) {
         printf("VISA\n");
     }
     // 16 digits starting with 51-55 is MASTERCARD
-    else if (length == 16 && h == 5 && p >= 1 && p <= 5)
-    {
+    else if (length == 16 && h == 5 && p >= 1 && p <= 5) {
         printf("MASTERCARD\n");
     }
     // 16 digits starting with 4 is VISA
-    else if (length == 16 && h == 4)
-    {
+    else if (length == 16 && h == 4) {
         printf("VISA\n");
     }
-    else
-    {
+    else {
         printf("INVALID\n");
     }
 }
@@ -103,10 +92,10 @@ int double_digit(int digit)
 {
     int doubled = digit * 2;
 
-    if (doubled > 9)
-    {
+    if (doubled > 9) {
         return doubled - 9;
     }
+    
     return doubled;
 }
 
