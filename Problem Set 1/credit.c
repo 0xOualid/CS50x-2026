@@ -88,8 +88,7 @@ int main(void) {
 }
 
 // Doubles a digit and returns the sum of the digits of the result
-int double_digit(int digit)
-{
+int double_digit(int digit) {
     int doubled = digit * 2;
 
     if (doubled > 9) {
