@@ -1,40 +1,31 @@
 #include "helpers.h"
 #include <math.h>
 
-typedef struct
-{
+typedef struct {
     float x;
     float y;
 } __attribute__((__packed__)) KERNEL;
 
 // Check range < 255
-void check_range_float(float *color)
-{
-    if (*color > 255)
-    {
+void check_range_float(float *color) {
+    if (*color > 255) {
         *color = 255;
     }
-    else if (*color < 0)
-    {
+    else if (*color < 0) {
         *color = 0;
     }
 }
 
-void check_range_byte(BYTE *color)
-{
-    if (*color > 255)
-    {
+void check_range_byte(BYTE *color) {
+    if (*color > 255) {
         *color = 255;
     }
 }
 
 // Convert image to grayscale
-void grayscale(int height, int width, RGBTRIPLE image[height][width])
-{
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
+void grayscale(int height, int width, RGBTRIPLE image[height][width]) {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
             // Calculate average
             float avg =
                 (float) (image[i][j].rgbtBlue + image[i][j].rgbtGreen + image[i][j].rgbtRed) / 3.0f;
@@ -56,12 +47,9 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
 }
 
 // Reflect image horizontally
-void reflect(int height, int width, RGBTRIPLE image[height][width])
-{
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width / 2; j++)
-        {
+void reflect(int height, int width, RGBTRIPLE image[height][width]) {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width / 2; j++) {
             // Swap
             RGBTRIPLE temp = image[i][j];
             image[i][j] = image[i][width - j - 1];
@@ -73,37 +61,28 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
 }
 
 // Blur image
-void blur(int height, int width, RGBTRIPLE image[height][width])
-{
+void blur(int height, int width, RGBTRIPLE image[height][width]) {
     // Copy image
     RGBTRIPLE copy[height][width];
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
             copy[i][j] = image[i][j];
         }
     }
 
     // Blur image
     // Loop through image
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
             float r = 0, g = 0, b = 0, counter = 0;
 
             // Loop through box around pixel
-            for (int x = -1; x < 2; x++)
-            {
-                if (x + i < 0 || x + i >= height)
-                {
+            for (int x = -1; x < 2; x++) {
+                if (x + i < 0 || x + i >= height) {
                     continue;
                 }
-                for (int y = -1; y < 2; y++)
-                {
-                    if (y + j < 0 || y + j >= width)
-                    {
+                for (int y = -1; y < 2; y++) {
+                    if (y + j < 0 || y + j >= width) {
                         continue;
                     }
 
@@ -130,10 +109,8 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
     }
 
     // Get an image
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
             image[i][j] = copy[i][j];
         }
     }
@@ -142,14 +119,11 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 }
 
 // Detect edges
-void edges(int height, int width, RGBTRIPLE image[height][width])
-{
+void edges(int height, int width, RGBTRIPLE image[height][width]) {
     // Copy image
     RGBTRIPLE copy[height][width];
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
             copy[i][j] = image[i][j];
         }
     }
@@ -170,22 +144,18 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
     float r, g, b, xR, xG, xB, yR, yG, yB;
 
     // Loop through image
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
             r = g = b = 0;
             xR = xG = xB = 0;
             yR = yG = yB = 0;
 
             // Loop through box around pixel
-            for (int k = 0; k < 9; k++)
-            {
+            for (int k = 0; k < 9; k++) {
                 int x = pos[k].x + i;
                 int y = pos[k].y + j;
 
-                if (x < 0 || x >= height || y < 0 || y >= width)
-                {
+                if (x < 0 || x >= height || y < 0 || y >= width) {
                     r = g = b = 0;
                     continue;
                 }
@@ -222,10 +192,8 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
     }
 
     // Get an image
-    for (int i = 0; i < height; i++)
-    {
-        for (int j = 0; j < width; j++)
-        {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
             image[i][j] = copy[i][j];
         }
     }

@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <sys/resource.h>
 #include <sys/time.h>
-
 #include "dictionary.h"
 
 // Undefine any definitions
@@ -17,11 +16,9 @@
 // Prototype
 double calculate(const struct rusage *b, const struct rusage *a);
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     // Check for correct number of args
-    if (argc != 2 && argc != 3)
-    {
+    if (argc != 2 && argc != 3) {
         printf("Usage: ./speller [DICTIONARY] text\n");
         return 1;
     }
@@ -41,8 +38,7 @@ int main(int argc, char *argv[])
     getrusage(RUSAGE_SELF, &after);
 
     // Exit if dictionary not loaded
-    if (!loaded)
-    {
+    if (!loaded) {
         printf("Could not load %s.\n", dictionary);
         return 1;
     }
@@ -53,8 +49,7 @@ int main(int argc, char *argv[])
     // Try to open text
     char *text = (argc == 3) ? argv[2] : argv[1];
     FILE *file = fopen(text, "r");
-    if (file == NULL)
-    {
+    if (file == NULL) {
         printf("Could not open %s.\n", text);
         unload();
         return 1;
@@ -69,18 +64,15 @@ int main(int argc, char *argv[])
 
     // Spell-check each word in text
     char c;
-    while (fread(&c, sizeof(char), 1, file))
-    {
+    while (fread(&c, sizeof(char), 1, file)) {
         // Allow only alphabetical characters and apostrophes
-        if (isalpha(c) || (c == '\'' && index > 0))
-        {
+        if (isalpha(c) || (c == '\'' && index > 0)) {
             // Append character to word
             word[index] = c;
             index++;
 
             // Ignore alphabetical strings too long to be words
-            if (index > LENGTH)
-            {
+            if (index > LENGTH) {
                 // Consume remainder of alphabetical string
                 while (fread(&c, sizeof(char), 1, file) && isalpha(c));
 
@@ -90,8 +82,7 @@ int main(int argc, char *argv[])
         }
 
         // Ignore words with numbers (like MS Word can)
-        else if (isdigit(c))
-        {
+        else if (isdigit(c)) {
             // Consume remainder of alphanumeric string
             while (fread(&c, sizeof(char), 1, file) && isalnum(c));
 
@@ -100,8 +91,7 @@ int main(int argc, char *argv[])
         }
 
         // We must have found a whole word
-        else if (index > 0)
-        {
+        else if (index > 0) {
             // Terminate current word
             word[index] = '\0';
 
@@ -117,8 +107,7 @@ int main(int argc, char *argv[])
             time_check += calculate(&before, &after);
 
             // Print word if misspelled
-            if (misspelled)
-            {
+            if (misspelled) {
                 printf("%s\n", word);
                 misspellings++;
             }
@@ -129,8 +118,7 @@ int main(int argc, char *argv[])
     }
 
     // Check whether there was an error
-    if (ferror(file))
-    {
+    if (ferror(file)) {
         fclose(file);
         printf("Error reading %s.\n", text);
         unload();
@@ -154,8 +142,7 @@ int main(int argc, char *argv[])
     getrusage(RUSAGE_SELF, &after);
 
     // Abort if dictionary not unloaded
-    if (!unloaded)
-    {
+    if (!unloaded) {
         printf("Could not unload %s.\n", dictionary);
         return 1;
     }
@@ -179,14 +166,11 @@ int main(int argc, char *argv[])
 }
 
 // Returns number of seconds between b and a
-double calculate(const struct rusage *b, const struct rusage *a)
-{
-    if (b == NULL || a == NULL)
-    {
+double calculate(const struct rusage *b, const struct rusage *a) {
+    if (b == NULL || a == NULL) {
         return 0.0;
     }
-    else
-    {
+    else {
         return ((((a->ru_utime.tv_sec * 1000000 + a->ru_utime.tv_usec) -
                   (b->ru_utime.tv_sec * 1000000 + b->ru_utime.tv_usec)) +
                  ((a->ru_stime.tv_sec * 1000000 + a->ru_stime.tv_usec) -

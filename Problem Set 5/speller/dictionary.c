@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
-
 #include "dictionary.h"
 
 #define PRIME 5
@@ -15,8 +14,7 @@
 unsigned int count_words = 0;
 
 // Represents a node in a hash table
-typedef struct node
-{
+typedef struct node {
     char word[LENGTH + 1];
     struct node *next;
 } node;
@@ -29,13 +27,11 @@ const unsigned int N = 5381;
 node *table[N];
 
 // Returns true if word is in dictionary, else false
-bool check(const char *word)
-{
+bool check(const char *word) {
     // TODO
 
     // Ensure word exist
-    if (word == NULL)
-    {
+    if (word == NULL) {
         return false;
     }
 
@@ -46,11 +42,9 @@ bool check(const char *word)
     node *trav = table[hash_value];
 
     // Traverse the linked list
-    while (trav != NULL)
-    {
+    while (trav != NULL) {
         // Case-insensitive comparison
-        if (strcasecmp(trav->word, word) == 0)
-        {
+        if (strcasecmp(trav->word, word) == 0) {
             return true;
         }
         trav = trav->next;
@@ -61,14 +55,12 @@ bool check(const char *word)
 }
 
 // Hashes word to a number
-unsigned int hash(const char *word)
-{
+unsigned int hash(const char *word) {
     // TODO: Improve this hash function
     unsigned int result = 0;
 
     // Calculate hash value
-    for (int i = 0; word[i] != '\0'; ++i)
-    {
+    for (int i = 0; word[i] != '\0'; ++i) {
         // Spreading hash value with DJB2 algorithm, PRIME = 5
         // Result: 1.64 for holmes.txt
         result = ((result << PRIME) + result) + tolower(word[i]);
@@ -87,8 +79,7 @@ unsigned int hash(const char *word)
     }
 
     // Hash value between 0 and N - 1
-    if (result > (N - 1))
-    {
+    if (result > (N - 1)) {
         result = result % N;
     }
 
@@ -96,16 +87,14 @@ unsigned int hash(const char *word)
 }
 
 // Loads dictionary into memory, returning true if successful, else false
-bool load(const char *dictionary)
-{
+bool load(const char *dictionary) {
     // TODO
 
     // Open a file
     FILE *source = fopen(dictionary, "r");
 
     // Check the file
-    if (source == NULL)
-    {
+    if (source == NULL) {
         printf("Could not open file %s.\n", dictionary);
         return false;
     }
@@ -114,14 +103,12 @@ bool load(const char *dictionary)
     node *buffer = malloc(sizeof(node));
 
     // Read each word in the file
-    while ((fscanf(source, "%s", buffer->word)) != EOF)
-    {
+    while ((fscanf(source, "%s", buffer->word)) != EOF) {
         // Allocate memory for a new word
         node *new_word = malloc(sizeof(node));
 
         // Check the node
-        if (new_word == NULL)
-        {
+        if (new_word == NULL) {
             return false;
         }
 
@@ -149,28 +136,24 @@ bool load(const char *dictionary)
 }
 
 // Returns number of words in dictionary if loaded, else 0 if not yet loaded
-unsigned int size(void)
-{
+unsigned int size(void) {
     // TODO
     return count_words;
 }
 
 // Unloads dictionary from memory, returning true if successful, else false
-bool unload(void)
-{
+bool unload(void) {
     // TODO
     node *trav = NULL;
     node *tmp = NULL;
 
     // Traverse through the table
-    for (int i = 0; i < N; ++i)
-    {
+    for (int i = 0; i < N; ++i) {
         // Point to linked list
         trav = table[i];
 
         // Traverse and free the list
-        while (trav != NULL)
-        {
+        while (trav != NULL) {
             tmp = trav;
             trav = trav->next;
             free(tmp);

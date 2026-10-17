@@ -1,32 +1,27 @@
 #include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "helpers.h"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     // Define allowable filters
     char *filters = "begr";
 
     // Get filter flag and check validity
     char filter = getopt(argc, argv, filters);
-    if (filter == '?')
-    {
+    if (filter == '?') {
         printf("Invalid filter.\n");
         return 1;
     }
 
     // Ensure only one filter
-    if (getopt(argc, argv, filters) != -1)
-    {
+    if (getopt(argc, argv, filters) != -1) {
         printf("Only one filter allowed.\n");
         return 2;
     }
 
     // Ensure proper usage
-    if (argc != optind + 2)
-    {
+    if (argc != optind + 2) {
         printf("Usage: ./filter [flag] infile outfile\n");
         return 3;
     }
@@ -37,16 +32,14 @@ int main(int argc, char *argv[])
 
     // Open input file
     FILE *inptr = fopen(infile, "r");
-    if (inptr == NULL)
-    {
+    if (inptr == NULL) {
         printf("Could not open %s.\n", infile);
         return 4;
     }
 
     // Open output file
     FILE *outptr = fopen(outfile, "w");
-    if (outptr == NULL)
-    {
+    if (outptr == NULL) {
         fclose(inptr);
         printf("Could not create %s.\n", outfile);
         return 5;
@@ -62,8 +55,7 @@ int main(int argc, char *argv[])
 
     // Ensure infile is (likely) a 24-bit uncompressed BMP 4.0
     if (bf.bfType != 0x4d42 || bf.bfOffBits != 54 || bi.biSize != 40 ||
-        bi.biBitCount != 24 || bi.biCompression != 0)
-    {
+        bi.biBitCount != 24 || bi.biCompression != 0) {
         fclose(outptr);
         fclose(inptr);
         printf("Unsupported file format.\n");
@@ -76,8 +68,7 @@ int main(int argc, char *argv[])
 
     // Allocate memory for image
     RGBTRIPLE(*image)[width] = calloc(height, width * sizeof(RGBTRIPLE));
-    if (image == NULL)
-    {
+    if (image == NULL) {
         printf("Not enough memory to store image.\n");
         fclose(outptr);
         fclose(inptr);
@@ -88,8 +79,7 @@ int main(int argc, char *argv[])
     int padding = (4 - (width * sizeof(RGBTRIPLE)) % 4) % 4;
 
     // Iterate over infile's scanlines
-    for (int i = 0; i < height; i++)
-    {
+    for (int i = 0; i < height; i++) {
         // Read row into pixel array
         fread(image[i], sizeof(RGBTRIPLE), width, inptr);
 
@@ -98,8 +88,7 @@ int main(int argc, char *argv[])
     }
 
     // Filter image
-    switch (filter)
-    {
+    switch (filter) {
         // Blur
         case 'b':
             blur(height, width, image);
@@ -128,14 +117,12 @@ int main(int argc, char *argv[])
     fwrite(&bi, sizeof(BITMAPINFOHEADER), 1, outptr);
 
     // Write new pixels to outfile
-    for (int i = 0; i < height; i++)
-    {
+    for (int i = 0; i < height; i++) {
         // Write row to outfile
         fwrite(image[i], sizeof(RGBTRIPLE), width, outptr);
 
         // Write padding at end of row
-        for (int k = 0; k < padding; k++)
-        {
+        for (int k = 0; k < padding; k++) {
             fputc(0x00, outptr);
         }
     }
